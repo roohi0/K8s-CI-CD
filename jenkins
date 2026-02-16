@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    environment {
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
+    }
+
+    stages {
+        stage('Deploy') {
+            steps {
+                sh 'kubectl apply -f /home/roohi/k8s/nginxdep.yaml'
+                sh 'kubectl apply -f /home/roohi/k8s/hpatask.yaml '
+                sh 'kubectl apply -f /home/roohi/k8s/svc.yaml '
+            }
+        }
+    }
